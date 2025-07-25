@@ -1,6 +1,30 @@
+
+using LocalizaEmpresas.Data;
+using LocalizaEmpresas.Models;
+using LocalizaEmpresas.Services;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+
+var connectionString = builder.Configuration.GetConnectionString("MySqlConnection");
+
+builder.Services.AddDbContext<UsuarioContext>(options =>
+    options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString)));
+
+
+builder.Services
+    .AddIdentity<Usuario, IdentityRole>()
+    .AddEntityFrameworkStores<UsuarioContext>()
+    .AddDefaultTokenProviders();
+
+builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+
+
+
+builder.Services.AddScoped<UsuarioService>();
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
