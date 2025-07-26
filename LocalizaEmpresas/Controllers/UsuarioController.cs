@@ -21,5 +21,12 @@ namespace LocalizaEmpresas.Controllers
             await _usuarioService.CadastrarUsuarioAsync(dto);
             return Ok("Usuário cadastrado com sucesso!");
         }
+
+        [HttpPost("login")]
+        public async Task<IActionResult> LoginUsuario([FromBody] LoginUsuarioDto dto)
+        {
+            var usuario = await _usuarioService.LoginUsuarioAsync(dto);
+            return Ok(usuario);
+        }   
     }
 }
