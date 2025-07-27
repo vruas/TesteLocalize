@@ -18,8 +18,8 @@ namespace LocalizaEmpresas.Dtos
             public string Tipo { get; set; }
             [JsonPropertyName("natureza_juridica")]
             public string NaturezaJuridica { get; set; }
-            //[JsonPropertyName("atividade_principal")]
-            //public ICollection<AtividadePrincipalDto> AtividadePrincipal { get; set; }
+            [JsonPropertyName("atividade_principal")]
+            public List<AtividadePrincipalDto> AtividadePrincipal { get; set; }
             [JsonPropertyName("logradouro")]
             public string Logradouro { get; set; }
             [JsonPropertyName("numero")]

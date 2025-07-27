@@ -10,12 +10,19 @@ namespace LocalizaEmpresas.Data
 
         }
 
+        public DbSet<Empresa> Empresas { get; set; }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-           
+            modelBuilder.Entity<Empresa>()
+                 .OwnsOne(empresa => empresa.AtividadePrincipal, atv =>
+                 {
+                     atv.Property(a => a.Codigo).HasColumnName("CodigoAtividadePrincipal");
+                     atv.Property(a => a.Descricao).HasColumnName("DescricaoAtividadePrincipal");
+                 });
         }
 
-        public DbSet<Empresa> Empresas { get; set; }
+        
 
     }
     

@@ -19,7 +19,9 @@ namespace LocalizaEmpresas.Models
         public string Tipo { get; set; }
         [JsonPropertyName("natureza_juridica")]
         public string NaturezaJuridica { get; set; }
-        
+        [JsonPropertyName("atividade_principal")]
+        public AtividadePrincipal AtividadePrincipal { get; set; }
+
         [JsonPropertyName("logradouro")]
         public string Logradouro { get; set; }
         [JsonPropertyName("numero")]

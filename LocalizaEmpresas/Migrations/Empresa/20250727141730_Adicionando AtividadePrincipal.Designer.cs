@@ -3,6 +3,7 @@ using LocalizaEmpresas.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace LocalizaEmpresas.Migrations.Empresa
 {
     [DbContext(typeof(EmpresaContext))]
-    partial class EmpresaContextModelSnapshot : ModelSnapshot
+    [Migration("20250727141730_Adicionando AtividadePrincipal")]
+    partial class AdicionandoAtividadePrincipal
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
