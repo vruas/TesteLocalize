@@ -23,12 +23,16 @@ builder.Services
     .AddEntityFrameworkStores<UsuarioContext>()
     .AddDefaultTokenProviders();
 
+builder.Services.AddDbContext<EmpresaContext>(options =>
+    options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString)));
+
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
 
 
 builder.Services.AddScoped<UsuarioService>();
 builder.Services.AddScoped<TokenService>();
+builder.Services.AddHttpClient<ReceitaWsService>();
 
 builder.Services.AddAuthentication(options =>
 {
