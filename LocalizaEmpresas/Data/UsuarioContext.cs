@@ -6,7 +6,7 @@ namespace LocalizaEmpresas.Data
 {
     public class UsuarioContext : IdentityDbContext<Usuario>
     {
-        public UsuarioContext(DbContextOptions options) : base(options)
+        public UsuarioContext(DbContextOptions<UsuarioContext> options) : base(options)
         {
         }
         

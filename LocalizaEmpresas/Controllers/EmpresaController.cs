@@ -3,12 +3,14 @@ using LocalizaEmpresas.Data;
 using LocalizaEmpresas.Dtos;
 using LocalizaEmpresas.Models;
 using LocalizaEmpresas.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace LocalizaEmpresas.Controllers
 {
     [ApiController]
     [Route("[controller]")]
+    [Authorize]
     public class EmpresaController : ControllerBase
     {
         private EmpresaContext _context;
