@@ -1,4 +1,5 @@
-﻿using System.Text.Json.Serialization;
+﻿using Microsoft.AspNetCore.Identity;
+using System.Text.Json.Serialization;
 
 namespace LocalizaEmpresas.Models
 {
@@ -36,6 +37,9 @@ namespace LocalizaEmpresas.Models
         public string Uf { get; set; }
         [JsonPropertyName("cep")]
         public string Cep { get; set; }
+
+        public string UsuarioId { get; set; }
+        public Usuario Usuario { get; set; }
 
     }
 }

@@ -36,5 +36,6 @@ namespace LocalizaEmpresas.Dtos
         public string Uf { get; set; }
         [JsonPropertyName("cep")]
         public string Cep { get; set; }
+
     }
 }

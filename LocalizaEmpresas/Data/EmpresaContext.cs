@@ -20,6 +20,13 @@ namespace LocalizaEmpresas.Data
                      atv.Property(a => a.Codigo).HasColumnName("CodigoAtividadePrincipal");
                      atv.Property(a => a.Descricao).HasColumnName("DescricaoAtividadePrincipal");
                  });
+
+            modelBuilder.Entity<Empresa>()
+                .HasOne(e => e.Usuario)
+                .WithMany(u => u.Empresas)
+                .HasForeignKey(e => e.UsuarioId);
+
+
         }
 
         

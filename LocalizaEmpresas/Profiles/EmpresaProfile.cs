@@ -24,8 +24,6 @@ namespace LocalizaEmpresas.Profiles
                 .ForMember(dest => dest.Descricao, opt => opt.MapFrom(src => src.Descricao));
 
 
-
-
         }
     }
 }

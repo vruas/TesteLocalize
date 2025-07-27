@@ -5,6 +5,8 @@ using LocalizaEmpresas.Models;
 using LocalizaEmpresas.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using System.Security.Claims;
 
 namespace LocalizaEmpresas.Controllers
 {
@@ -34,8 +36,12 @@ namespace LocalizaEmpresas.Controllers
                 return NotFound("CNPJ não encontrado ou inválido.");
             }
 
-            
             var empresa = _mapper.Map<Empresa>(dadosReceita);
+
+            string usuarioId = User.FindFirstValue("id");
+            empresa.UsuarioId = usuarioId;
+
+
 
             _context.Empresas.Add(empresa);
             await _context.SaveChangesAsync();
@@ -46,8 +52,25 @@ namespace LocalizaEmpresas.Controllers
         [HttpGet()]
         public IActionResult ListarEmpresas()
         {
-            var empresas = _context.Empresas.ToList();
+            string usuarioId = User.FindFirstValue("id");
+
+            var empresas = _context.Empresas
+                .Where(empresas => empresas.UsuarioId == usuarioId).ToList();
             return Ok(empresas);
+        }
+
+        [HttpGet("{idUsuario}")]
+        public async Task<IActionResult> ListarEmpresasPorUsuario(string idUsuario)
+        {
+            var empresas = await _context.Empresas
+                .Where(e => e.UsuarioId == idUsuario)
+                .ToListAsync();
+            if (empresas == null || !empresas.Any())
+            {
+                return NotFound("Nenhuma empresa encontrada para este usuário.");
+            }
+            return Ok(empresas);
+
         }
     }
 }
