@@ -80,8 +80,15 @@ builder.Services.AddSwaggerGen(c =>
             Array.Empty<string>()
         }
     });
-});
 
+    var xmlFile = $"{AppDomain.CurrentDomain.FriendlyName}.xml";
+    var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
+    if (File.Exists(xmlPath))
+    {
+        c.IncludeXmlComments(xmlPath);
+    }
+
+});
 
 
 var app = builder.Build();
