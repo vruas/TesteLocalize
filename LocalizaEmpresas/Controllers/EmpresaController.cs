@@ -50,27 +50,31 @@ namespace LocalizaEmpresas.Controllers
         }
 
         [HttpGet()]
-        public IActionResult ListarEmpresas()
+        public IActionResult ListarEmpresas([FromQuery] int skip = 0, [FromQuery] int take = 10)
         {
             string usuarioId = User.FindFirstValue("id");
 
             var empresas = _context.Empresas
-                .Where(empresas => empresas.UsuarioId == usuarioId).ToList();
+                .Where(empresas => empresas.UsuarioId == usuarioId)
+                .Skip(skip)
+                .Take(take)
+                .ToList();
             return Ok(empresas);
         }
 
         [HttpGet("{idUsuario}")]
-        public async Task<IActionResult> ListarEmpresasPorUsuario(string idUsuario)
+        public async Task<IActionResult> ListarEmpresasPorUsuario(string idUsuario, [FromQuery] int skip = 0, [FromQuery] int take = 10)
         {
             var empresas = await _context.Empresas
                 .Where(e => e.UsuarioId == idUsuario)
+                .Skip(skip)
+                .Take(take)
                 .ToListAsync();
             if (empresas == null || !empresas.Any())
             {
                 return NotFound("Nenhuma empresa encontrada para este usuário.");
             }
             return Ok(empresas);
-
         }
     }
 }
