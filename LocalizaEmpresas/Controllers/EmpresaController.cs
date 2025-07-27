@@ -71,7 +71,6 @@ namespace LocalizaEmpresas.Controllers
             string usuarioId = User.FindFirstValue("id");
 
             var empresas = await _context.Empresas
-                .Where(e => e.UsuarioId == usuarioId)
                 .Skip(skip)
                 .Take(take)
                 .ToListAsync();
