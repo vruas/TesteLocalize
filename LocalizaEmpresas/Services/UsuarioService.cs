@@ -2,6 +2,7 @@
 using LocalizaEmpresas.Dtos;
 using LocalizaEmpresas.Models;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 
 namespace LocalizaEmpresas.Services;
 
@@ -53,5 +54,11 @@ public class UsuarioService
         var token = _tokenService.GerarToken(usuario);
 
         return token;
+    }
+
+   
+    public async Task<IEnumerable<Usuario>> ObterUsuariosAsync()
+    {
+        return await _userManager.Users.ToListAsync();
     }
 }

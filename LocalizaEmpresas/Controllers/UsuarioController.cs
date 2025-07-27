@@ -27,6 +27,15 @@ namespace LocalizaEmpresas.Controllers
         {
             var usuario = await _usuarioService.LoginUsuarioAsync(dto);
             return Ok(usuario);
-        }   
+        }
+
+        [HttpGet("listarUsuarios")]
+        public async Task<IActionResult> ObterUsuarios()
+        {
+            var usuarios = await _usuarioService.ObterUsuariosAsync();
+            return Ok(usuarios);
+        }
+
+
     }
 }

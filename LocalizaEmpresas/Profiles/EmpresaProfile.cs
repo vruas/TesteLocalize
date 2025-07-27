@@ -23,6 +23,10 @@ namespace LocalizaEmpresas.Profiles
                 .ForMember(dest => dest.Codigo, opt => opt.MapFrom(src => src.Codigo))
                 .ForMember(dest => dest.Descricao, opt => opt.MapFrom(src => src.Descricao));
 
+            CreateMap<Empresa, ListarEmpresasDto>();
+
+
+
 
         }
     }

@@ -49,18 +49,22 @@ namespace LocalizaEmpresas.Controllers
             return CreatedAtAction(nameof(CadastrarEmpresa), new { id = empresa.Id }, empresa);
         }
 
-        [HttpGet()]
-        public IActionResult ListarEmpresas([FromQuery] int skip = 0, [FromQuery] int take = 10)
+        [HttpGet]
+        public async Task<ActionResult<IEnumerable<ListarEmpresasDto>>> ListarEmpresas([FromQuery] int skip = 0, [FromQuery] int take = 10)
         {
             string usuarioId = User.FindFirstValue("id");
 
-            var empresas = _context.Empresas
-                .Where(empresas => empresas.UsuarioId == usuarioId)
+            var empresas = await _context.Empresas
+                .Where(e => e.UsuarioId == usuarioId)
                 .Skip(skip)
                 .Take(take)
-                .ToList();
-            return Ok(empresas);
+                .ToListAsync();
+
+            var empresasDto = _mapper.Map<IEnumerable<ListarEmpresasDto>>(empresas);
+
+            return Ok(empresasDto);
         }
+
 
         [HttpGet("{idUsuario}")]
         public async Task<IActionResult> ListarEmpresasPorUsuario(string idUsuario, [FromQuery] int skip = 0, [FromQuery] int take = 10)
